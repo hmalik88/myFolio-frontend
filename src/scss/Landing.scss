@@ -1,0 +1,38 @@
+body {
+  background-image: url('../assets/myfoliobg.png');
+  background-size: auto;
+  background-repeat: repeat;
+  width: auto;
+  height: 100vh;
+  margin: 0;
+  overflow-y: hidden;
+}
+
+.landing-root {
+  height: 100%;
+  width: 100%;
+}
+
+.tree {
+  width: 55vw;
+  height: 100vw;
+  position: absolute;
+  bottom: -1000px;
+  left: -101px;
+}
+
+.landing-logo {
+  top: 300px;
+  position: relative;
+  width: calc(502px - 25%);
+  height: calc(266.98px - 25%);
+}
+
+.container-fluid {
+  height: 100%;
+}
+
+
+// .register-btn a, .login-btn a {
+
+// }
