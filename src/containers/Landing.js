@@ -20,24 +20,28 @@ function Landing() {
           <img src={tree} alt='' className='tree' />
         </Col>
         <Col className='text-center'>
-          <Row>
+          <Row className='row-1 align-items-end'>
             <Col>
               <img src={logo} alt='' className='landing-logo' />
             </Col>
           </Row>
-          <Row>
+          <Row className='row-2'>
+            <Col></Col>
             <Col>
-              <Link to='/register'>
+              <Link to='/register' className='register'>
                 <Button className='register-btn'>
                   Sign up
                 </Button>
               </Link>
-              <Link to='/login'>
+            </Col>
+            <Col>
+              <Link to='/login' className='login'>
                 <Button className='login-btn'>
                   Log in
                 </Button>
               </Link>
             </Col>
+            <Col></Col>
           </Row>
         </Col>
       </Row>

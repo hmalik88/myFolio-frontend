@@ -17,22 +17,33 @@ body {
   width: 55vw;
   height: 100vw;
   position: absolute;
-  bottom: -1000px;
+  bottom: -350px;
   left: -101px;
 }
 
 .landing-logo {
-  top: 300px;
   position: relative;
   width: calc(502px - 25%);
   height: calc(266.98px - 25%);
+  margin-bottom: 50px;
 }
 
 .container-fluid {
   height: 100%;
 }
 
+.login {
+  top: 400px;
+}
 
-// .register-btn a, .login-btn a {
+.row {
+  height: 100%;
+}
 
-// }
+.row-1 {
+  height: 70%;
+}
+
+.row-2 {
+  height: 30%;
+}
