@@ -87,10 +87,10 @@ function Portfolio() {
       <Container className='portfolio-page-container text-center'>
         <Row>
           <Col xs='7' className='portfolio-section'>
-            <h2 className='portfolio-header'>Portfolio ($5000.00)</h2>
+            <h2 className='portfolio-header'><span>Portfolio</span> ($5000.00)</h2>
           </Col>
           <Col xs='5' className='buy-form-section'>
-            <h2 className='cash-balance'>Cash - $4000.00</h2>
+            <h2 className='cash-balance'><span>Cash - </span>$4000.00</h2>
             <BuyForm
               ticker={ticker}
               quantity={quantity}
