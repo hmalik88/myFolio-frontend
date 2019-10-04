@@ -15,23 +15,47 @@ function Portfolio() {
     root.className = 'portfolio-root';
   }, []);
 
-  const handleTickerChange = e => setTicker(e.target.value);
-  const handleQuantityChange = e => e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value);
+  const handleTickerChange = e => {
+    setError('');
+    setTicker(e.target.value);
+  };
+  const handleQuantityChange = e => {
+    setError('');
+    e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value)
+  };
 
   const handleSubmission = async e => {
     e.preventDefault();
     setError('');
-    const ticker = e.target[0].value;
-    const quantity = e.target[1].value;
-    const result = await fetchPrice(ticker);
+    const tickerVal = ticker;
+    const quantityVal = quantity;
+    let formText = document.querySelector('.buy-row .form-text');
+    formText.classList.remove('text-muted')
+    formText.classList.remove('error-form-text');
+    formText.classList.remove('success-form-text');
+    if (tickerVal === '') {
+      formText.classList.add('error-form-text');
+      return setError('Please choose a ticker');
+    }
+    const result = await fetchPrice(tickerVal);
     if (result !== 'failed') {
-      if ((quantity * result) <= 5000.00) {
+      if ((quantityVal * result) <= 5000.00) {
         console.log('you got the money');
+        formText.classList.add('success-form-text');
+        setError('Transaction succesful')
+        setTicker('');
+        setQuantity(1);
       } else {
+        formText.classList.add('error-form-text');
         setError('You do not have enough in your balance to cover this transaction')
+        setTicker('');
+        setQuantity(1);
       }
     } else {
+      formText.classList.add('error-form-text');
       setError('That ticker symbol does not exist, please choose another')
+      setTicker('');
+      setQuantity(1);
     }
   }
 

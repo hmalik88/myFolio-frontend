@@ -12,7 +12,7 @@ function BuyForm(props) {
             <FormGroup className='text-left'>
               <Label for='ticker' className='buy-label'>Ticker</Label>
               <Input value={props.ticker} onChange={props.handleTickerChange} type='text' id='ticker' />
-              <FormText className='buy-form-text'>
+              <FormText>
                 {props.formText}
               </FormText>
             </FormGroup>

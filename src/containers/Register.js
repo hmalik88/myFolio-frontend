@@ -17,6 +17,10 @@ function Register() {
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordChange = e => setPassword(e.target.value);
 
+  // const handleSubmission = () => {
+  //   if ()
+  // }
+
   return (
     <>
       <img src={logo} className='register-logo' alt='' />
