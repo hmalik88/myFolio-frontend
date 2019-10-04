@@ -1,3 +1,22 @@
 .buy-col {
   display: flex;
 }
+
+.buy-label {
+  font-family: 'Montserrat', sans-serif;
+  color: #009549;
+}
+
+.buy-row .buy-spinner {
+  display: none;
+  align-self: center;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+
