@@ -2,3 +2,18 @@
   width: 210.81px;
   height: 63.72px;
 }
+
+.navbar {
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: #45B549;
+}
+
+.nav-link:hover {
+  color: #009549;
+}
