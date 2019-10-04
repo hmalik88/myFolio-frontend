@@ -1,0 +1,33 @@
+.login-root .login-form-container {
+  width: 600px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 40px;
+  justify-content: center;
+  display: flex;
+  box-shadow: 6px 6px 9px rgba(0,0,0,0.1);
+}
+
+form {
+  width: 500px;
+}
+
+.form-group {
+  width: 500px;
+}
+
+.login-title {
+  margin-bottom: 50px;
+  font-family: 'Montserrat', sans-serif;
+  color: #009549;
+}
+
+.login-label {
+  font-family: 'Montserrat', sans-serif;
+  color: #009549;
+}
+
+.login-form-btn {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
