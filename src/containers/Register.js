@@ -5,15 +5,28 @@ import '../scss/Register.scss';
 
 function Register() {
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   useEffect(() => {
     let root = document.querySelector('#root');
     root.className = 'register-root';
   }, [])
 
+  const handleEmailChange = e => setEmail(e.target.value);
+  const handlePasswordChange = e => setPassword(e.target.value);
+
   return (
     <>
       <img src={logo} className='register-logo' alt='' />
-      <RegisterForm />
+      <RegisterForm
+        email={email}
+        password={password}
+        handleEmailChange={handleEmailChange}
+        handlePasswordChange={handlePasswordChange}
+        error={error}
+      />
     </>
     )
 }
