@@ -8,7 +8,7 @@ function Portfolio() {
 
   const [ticker, setTicker] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState('');
+  const [formText, setFormText] = useState('');
 
   useEffect(() => {
     let root = document.querySelector('#root');
@@ -16,17 +16,17 @@ function Portfolio() {
   }, []);
 
   const handleTickerChange = e => {
-    setError('');
+    setFormText('');
     setTicker(e.target.value);
   };
   const handleQuantityChange = e => {
-    setError('');
+    setFormText('');
     e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value)
   };
 
   const handleSubmission = async e => {
     e.preventDefault();
-    setError('');
+    setFormText('');
     const tickerVal = ticker;
     const quantityVal = quantity;
     const formText = document.querySelector('.buy-row .form-text');
@@ -38,18 +38,18 @@ function Portfolio() {
       if ((quantityVal * result) <= 5000.00) {
         console.log('you got the money');
         formText.classList.add('success-form-text');
-        setError('Transaction succesful')
+        setFormText('Transaction succesful')
         setTicker('');
         setQuantity(1);
       } else if (result !== 'wrong ticker' ) {
         formText.classList.add('error-form-text');
-        setError('You do not have enough in your balance to cover this transaction')
+        setFormText('You do not have enough in your balance to cover this transaction.')
         setTicker('');
         setQuantity(1);
       }
     } else {
       formText.classList.add('error-form-text');
-      setError('That ticker symbol does not exist, please choose another')
+      setFormText('That ticker symbol does not exist, please choose another.')
       setTicker('');
       setQuantity(1);
     }
@@ -66,9 +66,8 @@ function Portfolio() {
         buyBtn.style.display = 'flex'
         buySpinner.style.display = 'none';
         formText.classList.add('error-form-text');
-        setError('Please choose a ticker');
+        setFormText('Please choose a ticker.');
       }, 200);
-
       return 'wrong ticker';
     }
     return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=OQ8H5CP43TDBOU3U`)
@@ -97,7 +96,7 @@ function Portfolio() {
               handleTickerChange={handleTickerChange}
               handleQuantityChange={handleQuantityChange}
               handleSubmission={handleSubmission}
-              formText={error}
+              formText={formText}
               />
           </Col>
         </Row>
