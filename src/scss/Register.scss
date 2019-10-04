@@ -1,5 +1,5 @@
 .register-root {
-  background-color: #fff;
+  // background-color: #fff;
   width: 100%;
   height: 100%;
   display: flex;
@@ -9,7 +9,8 @@
 
 .register-root .register-form-container {
   width: 600px;
-  border: 1px solid #000;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
   padding: 40px;
   justify-content: center;
   display: flex;
@@ -28,7 +29,16 @@ form {
   height: 100%;
 }
 
+.register-label {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .register-title {
   margin-bottom: 50px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.register-form-btn {
+  font-family: 'Montserrat', sans-serif;
 }
 

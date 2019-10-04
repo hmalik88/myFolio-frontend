@@ -17,11 +17,11 @@ function Register() {
           <Form>
             <h2 className='register-title'>Sign up for an account!</h2>
             <FormGroup>
-              <Label for='register-email'>E-mail</Label>
+              <Label className='register-label' for='register-email'>E-mail</Label>
               <Input type='email' id='register-email' />
             </FormGroup>
             <FormGroup>
-              <Label for='register-password'>Password</Label>
+              <Label className='register-label' for='register-password'>Password</Label>
               <Input size='md' id='register-password' type='password' />
             </FormGroup>
             <Button className='register-form-btn'>Register</Button>
