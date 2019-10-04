@@ -29,14 +29,10 @@ function Portfolio() {
     setError('');
     const tickerVal = ticker;
     const quantityVal = quantity;
-    let formText = document.querySelector('.buy-row .form-text');
+    const formText = document.querySelector('.buy-row .form-text');
     formText.classList.remove('text-muted')
     formText.classList.remove('error-form-text');
     formText.classList.remove('success-form-text');
-    if (tickerVal === '') {
-      formText.classList.add('error-form-text');
-      return setError('Please choose a ticker');
-    }
     const result = await fetchPrice(tickerVal);
     if (result !== 'failed') {
       if ((quantityVal * result) <= 5000.00) {
@@ -45,7 +41,7 @@ function Portfolio() {
         setError('Transaction succesful')
         setTicker('');
         setQuantity(1);
-      } else {
+      } else if (result !== 'wrong ticker' ) {
         formText.classList.add('error-form-text');
         setError('You do not have enough in your balance to cover this transaction')
         setTicker('');
@@ -62,8 +58,19 @@ function Portfolio() {
   const fetchPrice = async ticker => {
     const buyBtn = document.querySelector('.buy-btn');
     const buySpinner = document.querySelector('.buy-spinner');
+    const formText = document.querySelector('.buy-row .form-text');
     buyBtn.style.display = 'none'
     buySpinner.style.display = 'flex';
+    if (ticker === '') {
+      setTimeout(() => {
+        buyBtn.style.display = 'flex'
+        buySpinner.style.display = 'none';
+        formText.classList.add('error-form-text');
+        setError('Please choose a ticker');
+      }, 200);
+
+      return 'wrong ticker';
+    }
     return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=OQ8H5CP43TDBOU3U`)
     .then(res => res.json())
     .then(json => {
