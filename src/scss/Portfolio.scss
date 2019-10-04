@@ -3,13 +3,28 @@
   width: 100%;
 }
 
-.portfolio-page-container {
-  width: 100%;
+.portfolio-root .portfolio-page-container {
   height: 100%;
+  max-width: 100%;
 }
 
 .portfolio-section {
   border-right: 1px solid rgba(0,0,0, 0.1);
+}
+
+.portfolio-header {
+  margin-top: 50px;
+  font-family: 'Montserrat', sans-serif;
+  color: #45B549;
+  letter-spacing: 2px;
+}
+
+.cash-balance {
+  margin-top: 150px;
+  font-family: 'Montserrat', sans-serif;
+  color: #45B549;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
 }
 
 
