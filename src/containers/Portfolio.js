@@ -7,7 +7,7 @@ import '../scss/Portfolio.scss';
 function Portfolio() {
 
   const [ticker, setTicker] = useState('');
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Portfolio() {
   }, []);
 
   const handleTickerChange = e => setTicker(e.target.value);
-  const handleQuantityChange = e => setQuantity(e.target.value);
+  const handleQuantityChange = e => e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value);
 
   const handleSubmission = async e => {
     e.preventDefault();

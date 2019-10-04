@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Landing from './containers/Landing';
 import Login from './containers/Login';
@@ -8,6 +8,17 @@ import Transactions from './containers/Transactions';
 import './scss/App.scss';
 
 function App() {
+
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    fetchUser();
+  }, [])
+
+  const fetchUser = () => {
+    return;
+  }
+
   return (
     <>
       <Switch>
