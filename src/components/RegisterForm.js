@@ -7,7 +7,7 @@ function RegisterForm(props) {
     <Container className='register-form-container'>
       <Row className='register-row'>
         <Col className='justify-content-center'>
-          <Form>
+          <Form onSubmit={props.handleSubmission}>
             <h2 className='register-title'>Sign up for an account!</h2>
             <FormGroup>
               <Label className='register-label' for='register-email'>E-mail</Label>

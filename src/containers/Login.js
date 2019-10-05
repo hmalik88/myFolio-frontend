@@ -7,7 +7,7 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [formText, setFormText] = useState('');
 
   useEffect(() => {
     let root = document.querySelector('#root');
@@ -25,7 +25,7 @@ function Login() {
         password={password}
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
-        error={error}
+        formText={formText}
       />
     </>
     )

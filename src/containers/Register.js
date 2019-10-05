@@ -3,7 +3,7 @@ import RegisterForm from '../components/RegisterForm';
 import logo from '../assets/myfoliologo.svg'
 import '../scss/Register.scss';
 
-function Register() {
+function Register(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +17,31 @@ function Register() {
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordChange = e => setPassword(e.target.value);
 
-  // const handleSubmission = () => {
-  //   if ()
-  // }
+  const handleSubmission = e => {
+    e.preventDefault()
+    const exp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    if (!email.match(exp)) return setFormText('Please enter a valid e-mail.');
+    let user = {
+      user: {
+        email: email,
+        password: password
+      }
+    }
+    fetch('http://localhost:3000/api/v1/users', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(json => {
+      localStorage.setItem("token", json.jwt);
+      props.history.push('/portfolio');
+    })
+
+  }
 
   return (
     <>
@@ -29,6 +51,7 @@ function Register() {
         password={password}
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
+        handleSubmission={handleSubmission}
         formText={formText}
       />
     </>

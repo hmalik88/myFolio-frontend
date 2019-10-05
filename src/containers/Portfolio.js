@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import NavBar from '../components/Navbar';
 import BuyForm from '../components/BuyForm';
+import bank from '../assets/bank-building.svg';
 import '../scss/Portfolio.scss';
 
 function Portfolio() {
@@ -19,6 +20,7 @@ function Portfolio() {
     setFormText('');
     setTicker(e.target.value);
   };
+
   const handleQuantityChange = e => {
     setFormText('');
     e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value)
@@ -89,6 +91,7 @@ function Portfolio() {
             <h2 className='portfolio-header'><span>Portfolio</span> ($5000.00)</h2>
           </Col>
           <Col xs='5' className='buy-form-section'>
+            <img src={bank} className='bank' alt='' />
             <h2 className='cash-balance'><span>Cash - </span>$4000.00</h2>
             <BuyForm
               ticker={ticker}
