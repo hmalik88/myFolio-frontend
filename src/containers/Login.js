@@ -51,7 +51,7 @@ function Login(props) {
       props.history.push("/portfolio")
     })
     .catch(error => {
-      let formText = document.querySelector('.login-row .form-text')
+      const formText = document.querySelector('.login-row .form-text')
       formText.classList.remove('text-muted');
       formText.classList.add('error-form-text');
       setFormText(error.message)

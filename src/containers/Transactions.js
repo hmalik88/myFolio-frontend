@@ -6,7 +6,7 @@ import NavBar from '../components/Navbar';
 function Transactions() {
 
   useEffect(() => {
-    let root = document.querySelector('#root');
+    const root = document.querySelector('#root');
     root.className = 'transactions-root';
   }, []);
 

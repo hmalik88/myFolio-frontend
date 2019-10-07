@@ -4,6 +4,12 @@ import logo from '../assets/myfoliologo.svg';
 import '../scss/Navbar.scss';
 
 function NavBar() {
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+  }
+
+
   return(
       <Navbar color='light' className='navbar-expand-sm'>
         <NavbarBrand>
@@ -17,7 +23,7 @@ function NavBar() {
             <NavLink href='/transactions'>Transactions</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href='/'>Log Out</NavLink>
+            <NavLink href='/' onClick={logOut}>Log Out</NavLink>
           </NavItem>
         </Nav>
       </Navbar>

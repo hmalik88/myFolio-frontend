@@ -12,13 +12,16 @@ function Portfolio() {
   const [formText, setFormText] = useState('');
 
   useEffect(() => {
-    let root = document.querySelector('#root');
+    const root = document.querySelector('#root');
     root.className = 'portfolio-root';
   }, []);
 
   const handleTickerChange = e => {
     setFormText('');
     setTicker(e.target.value);
+    // setTimeout(() => {
+
+    // }, 500)
   };
 
   const handleQuantityChange = e => {

@@ -50,10 +50,10 @@ function Register(props) {
       props.history.push('/portfolio')
     })
     .catch(error => {
-      let formText = document.querySelector('.register-row .form-text')
+      const formText = document.querySelector('.register-row .form-text')
       formText.classList.remove('text-muted');
       formText.classList.add('error-form-text');
-      return setFormText(error.message)
+      setFormText(error.message)
     })
   }
 
