@@ -23,7 +23,7 @@ function App(props) {
     <>
       <Switch>
         <Route exact path='/' component={Landing} />
-        <Route exact path='/login' component={Login} />
+        <Route exact path='/login' render={() => <Login {...props} />} />
         <Route exact path='/register' render={() => <Register {...props} />} />
         <Route exact path='/portfolio' component={Portfolio} />
         <Route exact path='/transactions' component={Transactions} />

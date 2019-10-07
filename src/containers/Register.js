@@ -38,9 +38,11 @@ function Register(props) {
     .then(res => res.json())
     .then(json => {
       localStorage.setItem("token", json.jwt);
-      props.history.push('/portfolio');
     })
-
+    .catch(error => {
+      return setFormText('That e-mail is already taken, please choose another.')
+    })
+    props.history.push('/portfolio');
   }
 
   return (

@@ -12,11 +12,11 @@ function RegisterForm(props) {
             <FormGroup>
               <Label className='register-label' for='register-email'>E-mail</Label>
               <Input value={props.email} onChange={props.handleEmailChange} type='email' id='register-email' />
-              <FormText>{props.error}</FormText>
+              <FormText>{props.formText}</FormText>
             </FormGroup>
             <FormGroup>
               <Label className='register-label' for='register-password'>Password</Label>
-              <Input value={props.password} onChange={props.handlePasswordChange} size='md' id='register-password' type='password' />
+              <Input value={props.password} onChange={props.handlePasswordChange} bsSize='md' id='register-password' type='password' />
             </FormGroup>
             <Button className='register-form-btn text-center'>Register</Button>
           </Form>
