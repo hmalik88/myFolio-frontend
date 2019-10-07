@@ -11,7 +11,7 @@ function BuyForm(props) {
           <Form onSubmit={props.handlePurchaseSubmission} className='text-center'>
             <FormGroup className='text-left'>
               <Label for='ticker' className='buy-label'>Ticker</Label>
-              <Input autocomplete='off' value={props.ticker} onChange={props.handleTickerChange} type='search' id='ticker' />
+              <Input autoComplete='off' value={props.ticker} onChange={props.handleTickerChange} type='search' id='ticker' />
               <FormText>
                 {props.formText}
               </FormText>
