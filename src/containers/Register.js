@@ -35,14 +35,20 @@ function Register(props) {
       method: 'POST',
       body: JSON.stringify(user)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error('That e-mail is already taken, please choose another.')
+      }
+    })
     .then(json => {
-      localStorage.setItem("token", json.jwt);
+      localStorage.setItem("token", json.jwt)
+      props.history.push('/portfolio')
     })
     .catch(error => {
-      return setFormText('That e-mail is already taken, please choose another.')
+      return setFormText(error.message)
     })
-    props.history.push('/portfolio');
   }
 
   return (
