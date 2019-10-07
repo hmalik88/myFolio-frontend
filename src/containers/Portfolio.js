@@ -26,7 +26,7 @@ function Portfolio() {
     e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value)
   };
 
-  const handleSubmission = async e => {
+  const handlePurchaseSubmission = async e => {
     e.preventDefault();
     setFormText('');
     const tickerVal = ticker;
@@ -98,7 +98,7 @@ function Portfolio() {
               quantity={quantity}
               handleTickerChange={handleTickerChange}
               handleQuantityChange={handleQuantityChange}
-              handleSubmission={handleSubmission}
+              handlePurchaseSubmission={handlePurchaseSubmission}
               formText={formText}
               />
           </Col>

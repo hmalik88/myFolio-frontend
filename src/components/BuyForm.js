@@ -8,7 +8,7 @@ function BuyForm(props) {
     <Container className='buy-form-container'>
       <Row className='buy-row'>
         <Col className='buy-col justify-content-center'>
-          <Form onSubmit={props.handleSubmission} className='text-center'>
+          <Form onSubmit={props.handlePurchaseSubmission} className='text-center'>
             <FormGroup className='text-left'>
               <Label for='ticker' className='buy-label'>Ticker</Label>
               <Input value={props.ticker} onChange={props.handleTickerChange} type='text' id='ticker' />

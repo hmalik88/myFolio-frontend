@@ -10,7 +10,7 @@ function Login(props) {
   const [formText, setFormText] = useState('');
 
   useEffect(() => {
-    let root = document.querySelector('#root');
+    const root = document.querySelector('#root');
     root.className = 'login-root';
   }, [])
 

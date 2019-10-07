@@ -10,18 +10,18 @@ function Register(props) {
   const [formText, setFormText] = useState('');
 
   useEffect(() => {
-    let root = document.querySelector('#root');
+    const root = document.querySelector('#root');
     root.className = 'register-root';
   }, [])
 
   const handleEmailChange = e => setEmail(e.target.value);
   const handlePasswordChange = e => setPassword(e.target.value);
 
-  const handleSubmission = e => {
+  const handleRegistration = e => {
     e.preventDefault()
     const exp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     if (!email.match(exp)) return setFormText('Please enter a valid e-mail.');
-    let user = {
+    const user = {
       user: {
         email: email,
         password: password
@@ -53,7 +53,7 @@ function Register(props) {
         password={password}
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
-        handleSubmission={handleSubmission}
+        handleRegistration={handleRegistration}
         formText={formText}
       />
     </>
