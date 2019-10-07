@@ -14,8 +14,14 @@ function Login(props) {
     root.className = 'login-root';
   }, [])
 
-  const handleEmailChange = e => setEmail(e.target.value);
-  const handlePasswordChange = e => setPassword(e.target.value);
+  const handleEmailChange = e => {
+    setFormText('');
+    setEmail(e.target.value);
+  }
+  const handlePasswordChange = e => {
+    setFormText('');
+    setPassword(e.target.value);
+  }
 
   const handleLogin = e => {
     e.preventDefault()
@@ -45,6 +51,9 @@ function Login(props) {
       props.history.push("/portfolio")
     })
     .catch(error => {
+      let formText = document.querySelector('.login-row .form-text')
+      formText.classList.remove('text-muted');
+      formText.classList.add('error-form-text');
       setFormText(error.message)
     })
 

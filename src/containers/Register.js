@@ -14,7 +14,10 @@ function Register(props) {
     root.className = 'register-root';
   }, [])
 
-  const handleEmailChange = e => setEmail(e.target.value);
+  const handleEmailChange = e => {
+    setFormText('');
+    setEmail(e.target.value);
+  };
   const handlePasswordChange = e => setPassword(e.target.value);
 
   const handleRegistration = e => {
@@ -47,6 +50,9 @@ function Register(props) {
       props.history.push('/portfolio')
     })
     .catch(error => {
+      let formText = document.querySelector('.register-row .form-text')
+      formText.classList.remove('text-muted');
+      formText.classList.add('error-form-text');
       return setFormText(error.message)
     })
   }

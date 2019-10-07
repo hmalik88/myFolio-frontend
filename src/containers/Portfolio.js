@@ -40,7 +40,7 @@ function Portfolio() {
       if ((quantityVal * result) <= 5000.00) {
         console.log('you got the money');
         formText.classList.add('success-form-text');
-        setFormText('Transaction succesful')
+        setFormText('Transaction successful')
         setTicker('');
         setQuantity(1);
       } else if (result !== 'wrong ticker' ) {
