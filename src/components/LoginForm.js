@@ -12,11 +12,11 @@ function LoginForm(props) {
             <FormGroup>
               <Label className='login-label' for='login-email'>E-mail</Label>
               <Input value={props.email} onChange={props.handleEmailChange} type='email' id='login-email' />
-              <FormText>{props.error}</FormText>
+              <FormText>{props.formText}</FormText>
             </FormGroup>
             <FormGroup>
               <Label className='login-label' for='login-password'>Password</Label>
-              <Input value={props.password} onChange={props.handlePasswordChange} size='md' id='login-password' type='password' />
+              <Input value={props.password} onChange={props.handlePasswordChange} bsSize='md' id='login-password' type='password' />
             </FormGroup>
             <Button className='login-form-btn text-center'>Log in</Button>
           </Form>

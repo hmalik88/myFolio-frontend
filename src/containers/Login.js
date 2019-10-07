@@ -33,13 +33,21 @@ function Login(props) {
       method: 'POST',
       body: JSON.stringify(login)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error('Invalid e-mail or password.')
+      }
+    })
     .then(json => {
       localStorage.setItem("token", json.jwt)
+      props.history.push("/portfolio")
     })
-    .then(() => {
-      props.history.push("/home")
+    .catch(error => {
+      setFormText(error.message)
     })
+
   }
 
   return (
