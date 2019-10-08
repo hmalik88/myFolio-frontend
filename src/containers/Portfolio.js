@@ -20,9 +20,6 @@ function Portfolio(props) {
   const handleTickerChange = e => {
     setFormText('');
     setTicker(e.target.value);
-    // setTimeout(() => {
-
-    // }, 500)
   };
 
   const handleQuantityChange = e => {
@@ -40,9 +37,9 @@ function Portfolio(props) {
     formText.classList.remove('error-form-text');
     formText.classList.remove('success-form-text');
     const result = await fetchPrice(tickerVal);
-    if (result !== 'failed') {
-      if ((quantityVal * result) <= 5000.00) {
-        console.log('you got the money');
+    if (result !== 'failed' ) {
+      if (result !== 'wrong ticker' && (quantityVal * result.price) <= props.user.user.balance) {
+        initiateTrade(quantityVal, result.price, result.ticker);
         formText.classList.add('success-form-text');
         setFormText('Transaction successful')
         setTicker('');
@@ -82,11 +79,35 @@ function Portfolio(props) {
       buyBtn.style.display = 'flex';
       buySpinner.style.display='none';
       if (json['Error Message']) return 'failed';
-      return parseFloat(json['Global Quote']['05. price']);
+      return {price: parseFloat(parseFloat(json['Global Quote']['05. price']).toFixed(2)), ticker: json['Global Quote']['01. symbol']};
     })
   }
 
+  const initiateTrade = (shareQuantity, sharePrice, ticker) => {
+    const trade = {
+      transaction: {
+        user_id: props.user.user.id,
+        ticker: ticker,
+        quantity: shareQuantity,
+        price: sharePrice
+      }
+    }
+    const token = localStorage.getItem("token");
+    fetch('http://localhost:3000/api/v1/transactions', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      method: 'POST',
+      body: JSON.stringify(trade)
+    })
+    .then(res => res.json())
+    .then(json => console.log(json.balance))
+  }
+
   const cashBalance = '$' + props.user.user.balance;
+  const portfolioBalance = '$' + props.user.transactions.length;
 
   return(
     <>
@@ -94,7 +115,7 @@ function Portfolio(props) {
       <Container className='portfolio-page-container text-center'>
         <Row>
           <Col xs='7' className='portfolio-section'>
-            <h2 className='portfolio-header'><span>Portfolio</span> ($5000.00)</h2>
+            <h2 className='portfolio-header'><span>Portfolio</span> ({portfolioBalance})</h2>
           </Col>
           <Col xs='5' className='buy-form-section'>
             <img src={bank} className='bank' alt='' />
