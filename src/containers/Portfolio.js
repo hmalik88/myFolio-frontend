@@ -5,7 +5,7 @@ import BuyForm from '../components/BuyForm';
 import bank from '../assets/bank-building.svg';
 import '../scss/Portfolio.scss';
 
-function Portfolio() {
+function Portfolio(props) {
 
   const [ticker, setTicker] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -14,7 +14,8 @@ function Portfolio() {
   useEffect(() => {
     const root = document.querySelector('#root');
     root.className = 'portfolio-root';
-  }, []);
+    console.log(props.user.user)
+  }, [props.user]);
 
   const handleTickerChange = e => {
     setFormText('');
@@ -85,6 +86,8 @@ function Portfolio() {
     })
   }
 
+  const cashBalance = '$' + props.user.user.balance;
+
   return(
     <>
       <NavBar />
@@ -95,7 +98,7 @@ function Portfolio() {
           </Col>
           <Col xs='5' className='buy-form-section'>
             <img src={bank} className='bank' alt='' />
-            <h2 className='cash-balance'><span>Cash - </span>$4000.00</h2>
+            <h2 className='cash-balance'><span>Cash - </span>{cashBalance}</h2>
             <BuyForm
               ticker={ticker}
               quantity={quantity}

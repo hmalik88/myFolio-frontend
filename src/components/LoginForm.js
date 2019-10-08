@@ -7,12 +7,12 @@ function LoginForm(props) {
     <Container className='login-form-container'>
       <Row className='login-row'>
         <Col className='justify-content-center'>
-          <Form onSubmit={props.handleLogin}>
+          <Form onSubmit={e => props.handleLogin(e, props.email, props.password)}>
             <h2 className='login-title'>Log in to your account!</h2>
             <FormGroup>
               <Label className='login-label' for='login-email'>E-mail</Label>
               <Input value={props.email} onChange={props.handleEmailChange} type='email' id='login-email' />
-              <FormText>{props.formText}</FormText>
+              <FormText>{props.loginFormText}</FormText>
             </FormGroup>
             <FormGroup>
               <Label className='login-label' for='login-password'>Password</Label>

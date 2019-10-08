@@ -7,12 +7,12 @@ function RegisterForm(props) {
     <Container className='register-form-container'>
       <Row className='register-row'>
         <Col className='justify-content-center'>
-          <Form onSubmit={props.handleRegistration}>
+          <Form onSubmit={e => props.handleRegistration(e, props.email, props.password)}>
             <h2 className='register-title'>Sign up for an account!</h2>
             <FormGroup>
               <Label className='register-label' for='register-email'>E-mail</Label>
               <Input value={props.email} onChange={props.handleEmailChange} type='email' id='register-email' />
-              <FormText>{props.formText}</FormText>
+              <FormText>{props.registerFormText}</FormText>
             </FormGroup>
             <FormGroup>
               <Label className='register-label' for='register-password'>Password</Label>

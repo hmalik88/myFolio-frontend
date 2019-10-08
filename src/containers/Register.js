@@ -7,7 +7,6 @@ function Register(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [formText, setFormText] = useState('');
 
   useEffect(() => {
     const root = document.querySelector('#root');
@@ -15,47 +14,10 @@ function Register(props) {
   }, [])
 
   const handleEmailChange = e => {
-    setFormText('');
+    props.setRegisterFormText('');
     setEmail(e.target.value);
   };
   const handlePasswordChange = e => setPassword(e.target.value);
-
-  const handleRegistration = e => {
-    e.preventDefault()
-    const exp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    if (!email.match(exp)) return setFormText('Please enter a valid e-mail.');
-    const user = {
-      user: {
-        email: email,
-        password: password
-      }
-    }
-    fetch('http://localhost:3000/api/v1/users', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(user)
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        throw new Error('That e-mail is already taken, please choose another.')
-      }
-    })
-    .then(json => {
-      localStorage.setItem("token", json.jwt)
-      props.history.push('/portfolio')
-    })
-    .catch(error => {
-      const formText = document.querySelector('.register-row .form-text')
-      formText.classList.remove('text-muted');
-      formText.classList.add('error-form-text');
-      setFormText(error.message)
-    })
-  }
 
   return (
     <>
@@ -65,8 +27,8 @@ function Register(props) {
         password={password}
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
-        handleRegistration={handleRegistration}
-        formText={formText}
+        handleRegistration={props.handleRegistration}
+        registerFormText={props.registerFormText}
       />
     </>
     )
