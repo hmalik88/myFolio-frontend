@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import NavBar from '../components/Navbar';
 import BuyForm from '../components/BuyForm';
+import PortfolioDisplay from './PortfolioDisplay';
 import bank from '../assets/bank-building.svg';
 import '../scss/Portfolio.scss';
 
@@ -17,7 +18,6 @@ function Portfolio(props) {
     const root = document.querySelector('#root');
     root.className = 'portfolio-root';
     console.log(props.user)
-    console.log('transactions before:', props.user.transactions);
     setTransactions([...props.user.transactions]);
     setBalance(Number(props.user.user.balance).toFixed(2));
   }, [props.user]);
@@ -35,7 +35,7 @@ function Portfolio(props) {
   const handlePurchaseSubmission = async e => {
     e.preventDefault();
     setFormText('');
-    const tickerVal = ticker;
+    const tickerVal = ticker.toUpperCase();
     const quantityVal = quantity;
     const formText = document.querySelector('.buy-row .form-text');
     formText.classList.remove('text-muted')
@@ -78,13 +78,17 @@ function Portfolio(props) {
       }, 200);
       return 'wrong ticker';
     }
-    return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=OQ8H5CP43TDBOU3U`)
+    return fetch(`https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${ticker}&token=pk_e564103e97a948c3b4a1484d391db3c1`)
     .then(res => res.json())
     .then(json => {
       buyBtn.style.display = 'flex';
       buySpinner.style.display='none';
-      if (json['Error Message']) return 'failed';
-      return {price: parseFloat(parseFloat(json['Global Quote']['05. price']).toFixed(2)), ticker: json['Global Quote']['01. symbol']};
+      return {price: parseFloat(parseFloat(json[ticker]['quote']['latestPrice']).toFixed(2)), ticker: ticker};
+    })
+    .catch(error => {
+      buyBtn.style.display = 'flex';
+      buySpinner.style.display='none';
+      return 'failed'
     })
   }
 
@@ -126,7 +130,7 @@ function Portfolio(props) {
         <Row>
           <Col xs='7' className='portfolio-section'>
             <h2 className='portfolio-header'><span>Portfolio</span> ({portfolioBalance})</h2>
-
+            <PortfolioDisplay transactions={transactions} />
           </Col>
           <Col xs='5' className='buy-form-section'>
             <img src={bank} className='bank' alt='' />
