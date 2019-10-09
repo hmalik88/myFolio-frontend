@@ -19,7 +19,6 @@ function PortfolioDisplay(props) {
       if (!tickerStr) return;
       const quotes = await fetch(`https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${tickerStr}&token=pk_e564103e97a948c3b4a1484d391db3c1`)
       .then(res => res.json())
-      console.log(obj)
       Object.keys(obj).forEach(company => {
         obj[company]['price'] = quotes[company]['quote']['latestPrice'];
         if (quotes[company]['quote']['open']) {
@@ -35,6 +34,7 @@ function PortfolioDisplay(props) {
         }
       });
       setTransactionObj(obj);
+      console.log(obj)
     }
     organizeTransactions();
   }, [props.transactions]);

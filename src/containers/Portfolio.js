@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import CountUp from 'react-countup';
 import NavBar from '../components/Navbar';
 import BuyForm from '../components/BuyForm';
 import PortfolioDisplay from './PortfolioDisplay';
@@ -118,10 +119,16 @@ function Portfolio(props) {
     })
   }
 
-  const cashBalance = '$' + balance;
+  const generateCountUp = () => {
+    if (props.user) {
+      return <CountUp className={"balance-amount"} end={balance} duration={0.5} decimals={2} redraw={true} useEasing={false} />
+    } else {
+      return null
+    }
+  }
+
+  const cashBalance = generateCountUp();
   const portfolioBalance = '$' + transactions.length;
-
-
 
   return(
     <>
@@ -134,7 +141,7 @@ function Portfolio(props) {
           </Col>
           <Col xs='5' className='buy-form-section'>
             <img src={bank} className='bank' alt='' />
-            <h2 className='cash-balance'><span>Cash - </span>{cashBalance}</h2>
+            <h2 className='cash-balance'><span>Cash - </span>${cashBalance}</h2>
             <BuyForm
               ticker={ticker}
               quantity={quantity}
