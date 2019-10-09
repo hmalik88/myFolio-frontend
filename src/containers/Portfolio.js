@@ -10,11 +10,16 @@ function Portfolio(props) {
   const [ticker, setTicker] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [formText, setFormText] = useState('');
+  const [balance, setBalance] = useState(0);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     const root = document.querySelector('#root');
     root.className = 'portfolio-root';
-    console.log(props.user.user)
+    console.log(props.user)
+    console.log('transactions before:', props.user.transactions);
+    setTransactions([...props.user.transactions]);
+    setBalance(Number(props.user.user.balance).toFixed(2));
   }, [props.user]);
 
   const handleTickerChange = e => {
@@ -103,11 +108,16 @@ function Portfolio(props) {
       body: JSON.stringify(trade)
     })
     .then(res => res.json())
-    .then(json => console.log(json.balance))
+    .then(json => {
+      setBalance(Number(json.balance).toFixed(2))
+      setTransactions([...transactions, json.transaction])
+    })
   }
 
-  const cashBalance = '$' + props.user.user.balance;
-  const portfolioBalance = '$' + props.user.transactions.length;
+  const cashBalance = '$' + balance;
+  const portfolioBalance = '$' + transactions.length;
+
+
 
   return(
     <>
@@ -116,6 +126,7 @@ function Portfolio(props) {
         <Row>
           <Col xs='7' className='portfolio-section'>
             <h2 className='portfolio-header'><span>Portfolio</span> ({portfolioBalance})</h2>
+
           </Col>
           <Col xs='5' className='buy-form-section'>
             <img src={bank} className='bank' alt='' />
