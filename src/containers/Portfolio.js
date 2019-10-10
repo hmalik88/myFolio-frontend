@@ -12,6 +12,7 @@ function Portfolio(props) {
   const [ticker, setTicker] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [formText, setFormText] = useState('');
+  const [quantityText, setQuantityText] = useState('');
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
 
@@ -25,39 +26,57 @@ function Portfolio(props) {
 
   const handleTickerChange = e => {
     setFormText('');
+    setQuantityText('');
     setTicker(e.target.value);
   };
 
   const handleQuantityChange = e => {
     setFormText('');
-    e.target.value < 1 ? setQuantity(1) : setQuantity(e.target.value)
+    setQuantityText('');
+    setQuantity(e.target.value)
   };
 
   const handlePurchaseSubmission = async e => {
     e.preventDefault();
     setFormText('');
     const tickerVal = ticker.toUpperCase();
-    const quantityVal = quantity;
-    const formText = document.querySelector('.buy-row .form-text');
-    formText.classList.remove('text-muted')
-    formText.classList.remove('error-form-text');
-    formText.classList.remove('success-form-text');
+    let quantityVal = quantity;
+    const quantityText = document.querySelector('.buy-row .qty-txt');
+    quantityText.classList.remove('text-muted');
+    quantityText.classList.remove('error-form-text');
+    const numbers = ['0','1','2','3','4','5','6','7','8','9'];
+    const splitQty = quantityVal.split('');
+    for (let i = 0; i < splitQty.length; i++) {
+      if (i == 0 && splitQty[i] === '0')  {
+        quantityText.classList.add('error-form-text');
+        return setQuantityText('Quantity should be a whole number only.');
+      }
+      if (!numbers.includes(splitQty[i])) {
+        quantityText.classList.add('error-form-text');
+        return setQuantityText('Quantity should be a numeric value only.');
+      }
+    }
+    quantityVal = parseInt(quantityVal);
+    const tickerText = document.querySelector('.buy-row .ticker-txt');
+    tickerText.classList.remove('text-muted')
+    tickerText.classList.remove('error-form-text');
+    tickerText.classList.remove('success-form-text');
     const result = await fetchPrice(tickerVal);
     if (result !== 'failed' ) {
       if (result !== 'wrong ticker' && (quantityVal * result.price) <= props.user.user.balance) {
         initiateTrade(quantityVal, result.price, result.ticker);
-        formText.classList.add('success-form-text');
+        tickerText.classList.add('success-form-text');
         setFormText('Transaction successful')
         setTicker('');
         setQuantity(1);
       } else if (result !== 'wrong ticker' ) {
-        formText.classList.add('error-form-text');
+        tickerText.classList.add('error-form-text');
         setFormText('You do not have enough in your balance to cover this transaction.')
         setTicker('');
         setQuantity(1);
       }
     } else {
-      formText.classList.add('error-form-text');
+      tickerText.classList.add('error-form-text');
       setFormText('That ticker symbol does not exist, please choose another.')
       setTicker('');
       setQuantity(1);
@@ -67,14 +86,14 @@ function Portfolio(props) {
   const fetchPrice = async ticker => {
     const buyBtn = document.querySelector('.buy-btn');
     const buySpinner = document.querySelector('.buy-spinner');
-    const formText = document.querySelector('.buy-row .form-text');
+    const tickerText = document.querySelector('.buy-row .ticker-txt');
     buyBtn.style.display = 'none'
     buySpinner.style.display = 'flex';
     if (ticker === '') {
       setTimeout(() => {
         buyBtn.style.display = 'flex'
         buySpinner.style.display = 'none';
-        formText.classList.add('error-form-text');
+        tickerText.classList.add('error-form-text');
         setFormText('Please choose a ticker.');
       }, 200);
       return 'wrong ticker';
@@ -121,7 +140,7 @@ function Portfolio(props) {
 
   const generateCountUp = () => {
     if (props.user) {
-      return <CountUp className={"balance-amount"} end={balance} duration={0.5} decimals={2} redraw={true} useEasing={false} />
+      return <CountUp className={"balance-amount"} end={Number(balance)} duration={0.5} decimals={2} redraw={true} useEasing={false} />
     } else {
       return null
     }
@@ -149,6 +168,7 @@ function Portfolio(props) {
               handleQuantityChange={handleQuantityChange}
               handlePurchaseSubmission={handlePurchaseSubmission}
               formText={formText}
+              quantityText={quantityText}
               />
           </Col>
         </Row>

@@ -12,13 +12,16 @@ function BuyForm(props) {
             <FormGroup className='text-left'>
               <Label for='ticker' className='buy-label'>Ticker</Label>
               <Input autoComplete='off' value={props.ticker} onChange={props.handleTickerChange} type='search' id='ticker' />
-              <FormText>
+              <FormText className='ticker-txt'>
                 {props.formText}
               </FormText>
             </FormGroup>
             <FormGroup className='text-left'>
-              <Label for='buy-qty' className='buy-label'>Quantity</Label>
-              <Input value={props.quantity} onChange={props.handleQuantityChange} type='number' id='buy-qty' />
+              <Label for='buy-qty' className='buy-label'>Quantity (whole shares only)</Label>
+              <Input autoComplete='off' value={props.quantity} onChange={props.handleQuantityChange} type='text' id='buy-qty' />
+              <FormText className='qty-txt'>
+                {props.quantityText}
+              </FormText>
             </FormGroup>
             <Button className='buy-btn'>Buy</Button>
             <Container className='loader-container'>
