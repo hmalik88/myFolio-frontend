@@ -11,10 +11,11 @@ function PortfolioDisplay(props) {
     const organizeTransactions = async () => {
       const obj = {};
       props.transactions.forEach(transaction => {
+        console.log(transaction);
         if (!obj[transaction.ticker]) {
-          obj[transaction.ticker] = {qty: 1, price: null, color: null}
+          obj[transaction.ticker] = {qty: transaction.quantity, price: null, color: null}
         } else {
-          obj[transaction.ticker]['qty']++;
+          obj[transaction.ticker]['qty'] += transaction.quantity;
         }
       })
       const tickerStr = Object.keys(obj).join(',');
@@ -61,7 +62,7 @@ function PortfolioDisplay(props) {
   }
 
   const portfolioBalance = () => {
-    if (Object.keys(transactionObj).length < 1) return null;
+    if (Object.keys(transactionObj).length < 1) return 0;
     let total = 0;
     for (let company of Object.keys(transactionObj)) {
       let price = transactionObj[company]['price'];

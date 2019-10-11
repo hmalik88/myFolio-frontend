@@ -30,6 +30,7 @@ function App(props) {
       .then(res => res.json());
       setUser(response);
       } else {
+        if (props.history.location.pathname === '/register' || '/login') return;
         props.history.push('/')
       }
     }
