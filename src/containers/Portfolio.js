@@ -46,6 +46,8 @@ function Portfolio(props) {
     setFormText('');
     const tickerVal = ticker.toUpperCase();
     let quantityVal = quantity;
+    const buyBtn = document.querySelector('.buy-btn');
+    const buySpinner = document.querySelector('.buy-spinner');
     const quantityText = document.querySelector('.buy-row .qty-txt');
     quantityText.classList.remove('text-muted');
     quantityText.classList.remove('error-form-text');
@@ -76,12 +78,16 @@ function Portfolio(props) {
         setModal(!modal);
       } else if (result !== 'wrong ticker' ) {
         tickerText.classList.add('error-form-text');
+        buyBtn.style.display = 'flex'
+        buySpinner.style.display = 'none';
         setFormText('You do not have enough in your balance to cover this transaction.')
         setTicker('');
         setQuantity(1);
       }
     } else {
       tickerText.classList.add('error-form-text');
+      buyBtn.style.display = 'flex'
+      buySpinner.style.display = 'none';
       setFormText('That ticker symbol does not exist, please choose another.')
       setTicker('');
       setQuantity(1);
@@ -197,13 +203,19 @@ function Portfolio(props) {
               quantityText={quantityText}
               />
             <Modal isOpen={modal} centered={true}>
-              <ModalHeader className='modal-header' toggle={cancelTrade}><div>Trade Confirmation</div></ModalHeader>
+              <ModalHeader className='modal-header' toggle={cancelTrade}><div><span>Trade Confirmation</span></div></ModalHeader>
               <ModalBody>
                 <span className='modal-company-label'>Company:</span>
-                <span className='modal-company'>{' '}{modalCompany}{' '}[{modalTicker}]</span>
+                <span className='modal-company'>{'    '}{modalCompany}{' '}[{modalTicker}]</span>
                 <br/>
-                <span className='modal-price-label'>Price:</span>
-                <span className='modal-price'>{' '}${Number(modalPrice).toFixed(2)}</span>
+                <span className='modal-price-label'>Price (per share):</span>
+                <span className='modal-price'>{'    '}${Number(modalPrice).toFixed(2)}</span>
+                <br/>
+                <span className='modal-quantity-label'>Quantity:</span>
+                <span className='modal-quantity'>{'    '}{quantity}</span>
+                <br/>
+                <span className='modal-amount-label'>Total Amount:</span>
+                <span className='modal-amount'>{'    '}${Number(modalPrice * quantity).toFixed(2)}</span>
               </ModalBody>
               <ModalFooter>
                 <Button color="success" onClick={continueTrade}>Confirm</Button>

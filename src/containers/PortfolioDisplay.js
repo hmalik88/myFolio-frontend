@@ -48,11 +48,11 @@ function PortfolioDisplay(props) {
       let color = transactionObj[company]['color'];
       let qty = transactionObj[company]['qty'];
       let result = Number(price * qty).toFixed(2);
-      let countQty = <CountUp end={qty} duration={0.5} decimals={0} redraw={true} useEasing={false} />
+      let countQty = <CountUp style={{color: 'black'}} end={qty} duration={0.5} decimals={0} redraw={true} useEasing={false} />
       let countResult = <CountUp className={`stock-color-${color}`} end={Number(result)} duration={0.5} decimals={2} redraw={true} useEasing={false} />
       let el = (
-        <ListGroupItem key={company}>
-          <span className={`stock-color-${color}`}>{company}</span> - {countQty} {qty > 1 ? 'shares' : 'share'}{' '}<span className={`stock-color-${color}`}>${countResult}</span>
+        <ListGroupItem key={company} className='portfolio-item'>
+          <span className={`stock-color-${color} company-span`}>{company}</span> - {countQty} {qty > 1 ? 'shares' : 'share'}{' '}<span className={`stock-color-${color}`}>${countResult}</span>
         </ListGroupItem>
         )
       stocks.push(el);

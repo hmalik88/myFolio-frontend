@@ -13,6 +13,7 @@
   border-right: 1px solid rgba(0,0,0, 0.1);
   overflow-y: auto;
   height: calc(100% - 100px);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .cash-balance {
@@ -37,10 +38,23 @@ span {
   margin-top: 100px;
 }
 
+.modal {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .modal-header div {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
+.modal-body {
+  letter-spacing: 0.5px
+}
+
+.modal-company-label, .modal-price-label, .modal-quantity-label, .modal-amount-label {
+  font-weight: 600;
+}
+
 
 
