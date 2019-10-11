@@ -19,7 +19,7 @@ function App(props) {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (token !== null) {
-        const response = await fetch('http://localhost:3000/api/v1/current_user', {
+        const response = await fetch('https://myfolio-api.herokuapp.com/api/v1/current_user', {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function App(props) {
         "password": password
       }
     }
-    fetch('http://localhost:3000/api/v1/login', {
+    fetch('https://myfolio-api.herokuapp.com/api/v1/login', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ function App(props) {
         password: password
       }
     }
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch('https://myfolio-api.herokuapp.com/api/v1/users', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

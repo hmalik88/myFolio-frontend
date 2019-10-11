@@ -129,7 +129,7 @@ function Portfolio(props) {
       }
     }
     const token = localStorage.getItem("token");
-    fetch('http://localhost:3000/api/v1/transactions', {
+    fetch('https://myfolio-api.herokuapp.com/api/v1/transactions', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
