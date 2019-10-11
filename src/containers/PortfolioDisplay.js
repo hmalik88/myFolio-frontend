@@ -17,14 +17,14 @@ function PortfolioDisplay(props) {
       })
       const tickerStr = Object.keys(obj).join(',');
       if (!tickerStr) return;
-      const quotes = await fetch(`https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${tickerStr}&token=pk_e564103e97a948c3b4a1484d391db3c1`)
+      let quotes = await fetch(`https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${tickerStr}&token=pk_e564103e97a948c3b4a1484d391db3c1`)
       .then(res => res.json())
       Object.keys(obj).forEach(company => {
         obj[company]['price'] = quotes[company]['quote']['latestPrice'];
         if (quotes[company]['quote']['open']) {
-          if (obj[company]['price'] < quotes['quote']['open']) {
+          if (obj[company]['price'] < quotes[company]['quote']['open']) {
             obj[company]['color'] = 'red';
-          } else if (obj[company]['price'] > quotes['quote']['open']) {
+          } else if (obj[company]['price'] > quotes[company]['quote']['open']) {
             obj[company]['color'] = 'green';
           } else {
             obj[company]['color'] = 'grey';

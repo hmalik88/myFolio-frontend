@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import CountUp from 'react-countup';
 import NavBar from '../components/Navbar';
 import BuyForm from '../components/BuyForm';
@@ -15,6 +15,10 @@ function Portfolio(props) {
   const [quantityText, setQuantityText] = useState('');
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [modalCompany, setModalCompany] = useState('');
+  const [modalTicker, setModalTicker] = useState('');
+  const [modalPrice, setModalPrice] = useState('');
 
   useEffect(() => {
     const root = document.querySelector('#root');
@@ -45,9 +49,9 @@ function Portfolio(props) {
     quantityText.classList.remove('text-muted');
     quantityText.classList.remove('error-form-text');
     const numbers = ['0','1','2','3','4','5','6','7','8','9'];
-    const splitQty = quantityVal.split('');
+    let splitQty = String(quantityVal).split('');
     for (let i = 0; i < splitQty.length; i++) {
-      if (i == 0 && splitQty[i] === '0')  {
+      if (i === 0 && splitQty[i] === '0')  {
         quantityText.classList.add('error-form-text');
         return setQuantityText('Quantity should be a whole number only.');
       }
@@ -57,6 +61,7 @@ function Portfolio(props) {
       }
     }
     quantityVal = parseInt(quantityVal);
+    setQuantity(quantityVal);
     const tickerText = document.querySelector('.buy-row .ticker-txt');
     tickerText.classList.remove('text-muted')
     tickerText.classList.remove('error-form-text');
@@ -64,11 +69,10 @@ function Portfolio(props) {
     const result = await fetchPrice(tickerVal);
     if (result !== 'failed' ) {
       if (result !== 'wrong ticker' && (quantityVal * result.price) <= props.user.user.balance) {
-        initiateTrade(quantityVal, result.price, result.ticker);
-        tickerText.classList.add('success-form-text');
-        setFormText('Transaction successful')
-        setTicker('');
-        setQuantity(1);
+        setModalPrice(result.price);
+        setModalTicker(result.ticker);
+        setModalCompany(result.companyName);
+        setModal(!modal);
       } else if (result !== 'wrong ticker' ) {
         tickerText.classList.add('error-form-text');
         setFormText('You do not have enough in your balance to cover this transaction.')
@@ -100,16 +104,8 @@ function Portfolio(props) {
     }
     return fetch(`https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${ticker}&token=pk_e564103e97a948c3b4a1484d391db3c1`)
     .then(res => res.json())
-    .then(json => {
-      buyBtn.style.display = 'flex';
-      buySpinner.style.display='none';
-      return {price: parseFloat(parseFloat(json[ticker]['quote']['latestPrice']).toFixed(2)), ticker: ticker};
-    })
-    .catch(error => {
-      buyBtn.style.display = 'flex';
-      buySpinner.style.display='none';
-      return 'failed'
-    })
+    .then(json => ({price: parseFloat(parseFloat(json[ticker]['quote']['latestPrice']).toFixed(2)), ticker: ticker, companyName: json[ticker]['quote']['companyName']}))
+    .catch(error => 'failed')
   }
 
   const initiateTrade = (shareQuantity, sharePrice, ticker) => {
@@ -146,6 +142,33 @@ function Portfolio(props) {
     }
   }
 
+  const cancelTrade = () => {
+    const tickerText = document.querySelector('.buy-row .ticker-txt');
+    const buyBtn = document.querySelector('.buy-btn');
+    const buySpinner = document.querySelector('.buy-spinner');
+    setModal(!modal);
+    tickerText.classList.add('error-form-text');
+    setFormText('Transaction canceled.');
+    setTicker('');
+    setQuantity(1);
+    buyBtn.style.display = 'flex';
+    buySpinner.style.display = 'none';
+  }
+
+  const continueTrade = () => {
+    const tickerText = document.querySelector('.buy-row .ticker-txt');
+    const buyBtn = document.querySelector('.buy-btn');
+    const buySpinner = document.querySelector('.buy-spinner');
+    setModal(!modal);
+    tickerText.classList.add('success-form-text');
+    setFormText('Transaction successful.')
+    setTicker('');
+    setQuantity(1);
+    buyBtn.style.display = 'flex';
+    buySpinner.style.display = 'none';
+    initiateTrade(quantity, modalPrice, modalTicker);
+  }
+
   const cashBalance = generateCountUp();
   const portfolioBalance = '$' + transactions.length;
 
@@ -170,6 +193,20 @@ function Portfolio(props) {
               formText={formText}
               quantityText={quantityText}
               />
+            <Modal isOpen={modal} centered={true}>
+              <ModalHeader className='modal-header' toggle={cancelTrade}><div>Trade Confirmation</div></ModalHeader>
+              <ModalBody>
+                <span className='modal-company-label'>Company:</span>
+                <span className='modal-company'>{' '}{modalCompany}{' '}[{modalTicker}]</span>
+                <br/>
+                <span className='modal-price-label'>Price:</span>
+                <span className='modal-price'>{' '}{modalPrice}</span>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="success" onClick={continueTrade}>Confirm</Button>
+                <Button color="danger" onClick={cancelTrade}>Cancel</Button>
+              </ModalFooter>
+            </Modal>
           </Col>
         </Row>
       </Container>
