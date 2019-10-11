@@ -64,7 +64,7 @@ function App(props) {
     .then(json => {
       localStorage.setItem("token", json.jwt)
       setUser({user: json.user, transactions: json.transactions});
-      props.history.push("/portfolio")
+      props.history.push('/portfolio')
     })
     .catch(error => {
       const formText = document.querySelector('.login-row .form-text')
@@ -130,7 +130,7 @@ function App(props) {
         <Route exact path='/' component={Landing} />
         <Route exact path='/login' render={() => <Login {...props} handleLogin={handleLogin} loginFormText={loginFormText} setLoginFormText={setLoginFormText} />} />
         <Route exact path='/register' render={() => <Register {...props} handleRegistration={handleRegistration} registerEmailText={registerEmailText} setRegisterEmailText={setRegisterEmailText} registerPasswordText={registerPasswordText} registerNameText={registerNameText} setRegisterPasswordText={setRegisterPasswordText} setRegisterNameText={setRegisterNameText} />} />
-        <Route exact path='/portfolio' render={() => <Portfolio user={user} />} />
+        <Route exact path='/portfolio' render={() => <Portfolio user={user} {...props} />} />
         <Route exact path='/transactions' render={() => <Transactions user={user} />} />
       </Switch>
     </>

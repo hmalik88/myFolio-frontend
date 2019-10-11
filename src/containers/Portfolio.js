@@ -184,7 +184,7 @@ function Portfolio(props) {
 
   return(
     <>
-      <NavBar />
+      <NavBar user={props.user} />
       <Container className='portfolio-page-container text-center'>
         <Row>
           <Col xs='7' className='portfolio-section'>

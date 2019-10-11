@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Container, ListGroup, ListGroupItem } from 'reactstrap';
 import NavBar from '../components/Navbar';
 import '../scss/Transactions.scss';
