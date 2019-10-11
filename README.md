@@ -1,6 +1,6 @@
 # | myFolio | Front-end |
 
-## LIVE LINK: https://myfolio-stocks.herokuapp.com/
+### LIVE LINK: https://myfolio-stocks.herokuapp.com/
 
 ### Installing the front-end
 
