@@ -1,0 +1,118 @@
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800&display=swap');
+
+.register-btn {
+  @extend .btn;
+  background-color: transparent;
+  border: 1px solid #45B549;
+  width: 225px;
+  height: 50px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 20px;
+  position: relative;
+  color: #45B549;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+.register-btn:hover {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.register-btn:focus {
+  outline: none;
+}
+
+.register-btn:active, .register-btn:target {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.register-btn:disabled {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.login-btn {
+  @extend .register-btn;
+  margin-left: 30px;
+  margin-right: 0px;
+}
+
+.register-form-btn {
+  @extend .btn;
+  width: 125px;
+  border: 1px solid #45B549;
+  background-color: transparent;
+  color: #45B549;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.register-form-btn:hover {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.register-form-btn:focus {
+  outline: none;
+}
+
+.register-form-btn:active, .register-form-btn:target {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.login-form-btn {
+  @extend .register-form-btn;
+}
+
+.login-form-btn:hover {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.login-form-btn:focus {
+  outline: none;
+}
+
+.login-form-btn:active, .login-form-btn:target {
+  background-color: #45B549;
+  color: #fff;
+  border: 1px solid #45B549;
+}
+
+.buy-btn {
+  @extend .register-form-btn;
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.error-form-text {
+  @extend .form-text;
+  color: red !important;
+}
+
+.success-form-text {
+  @extend .form-text;
+  color: #45B549 !important;
+}
+
+
+
