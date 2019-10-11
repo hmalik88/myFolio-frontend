@@ -5,6 +5,7 @@ import '../scss/Register.scss';
 
 function Register(props) {
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,18 +14,23 @@ function Register(props) {
     root.className = 'register-root';
   }, [])
 
+  const handleNameChange = e => setName(e.target.value);
+
   const handleEmailChange = e => {
     props.setRegisterFormText('');
     setEmail(e.target.value);
   };
+
   const handlePasswordChange = e => setPassword(e.target.value);
 
   return (
     <>
       <img src={logo} className='register-logo' alt='' />
       <RegisterForm
+        name={name}
         email={email}
         password={password}
+        handleNameChange={handleNameChange}
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
         handleRegistration={props.handleRegistration}

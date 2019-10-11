@@ -71,12 +71,13 @@ function App(props) {
     })
   }
 
-  const handleRegistration = (e, email, password) => {
+  const handleRegistration = (e, name, email, password) => {
     e.preventDefault()
     const exp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     if (!email.match(exp)) return setRegisterFormText('Please enter a valid e-mail.');
     const user = {
       user: {
+        name: name,
         email: email,
         password: password
       }
