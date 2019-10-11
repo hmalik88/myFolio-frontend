@@ -1,6 +1,7 @@
 .portfolio-root {
-  height: 100%;
+  height: 100vh;
   width: 100%;
+  overflow-y: hidden;
 }
 
 .portfolio-root .portfolio-page-container {
@@ -10,13 +11,8 @@
 
 .portfolio-section {
   border-right: 1px solid rgba(0,0,0, 0.1);
-}
-
-.portfolio-header {
-  margin-top: 75px;
-  font-family: 'Montserrat', sans-serif;
-  color: #45B549;
-  letter-spacing: 2px;
+  overflow-y: auto;
+  height: calc(100% - 100px);
 }
 
 .cash-balance {
@@ -45,10 +41,6 @@ span {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.modal-header button {
-  margin-left: 0px !important;
 }
 
 

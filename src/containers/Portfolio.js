@@ -37,6 +37,7 @@ function Portfolio(props) {
   const handleQuantityChange = e => {
     setFormText('');
     setQuantityText('');
+    if (e.target.value === '0') return setQuantity(1);
     setQuantity(e.target.value)
   };
 
@@ -105,7 +106,11 @@ function Portfolio(props) {
     return fetch(`https://cloud.iexapis.com/v1/stock/market/batch?&types=quote&symbols=${ticker}&token=pk_e564103e97a948c3b4a1484d391db3c1`)
     .then(res => res.json())
     .then(json => ({price: parseFloat(parseFloat(json[ticker]['quote']['latestPrice']).toFixed(2)), ticker: ticker, companyName: json[ticker]['quote']['companyName']}))
-    .catch(error => 'failed')
+    .catch(error => {
+      buyBtn.style.display = 'flex'
+      buySpinner.style.display = 'none';
+      return 'failed'
+    })
   }
 
   const initiateTrade = (shareQuantity, sharePrice, ticker) => {
@@ -170,7 +175,6 @@ function Portfolio(props) {
   }
 
   const cashBalance = generateCountUp();
-  const portfolioBalance = '$' + transactions.length;
 
   return(
     <>
@@ -178,7 +182,6 @@ function Portfolio(props) {
       <Container className='portfolio-page-container text-center'>
         <Row>
           <Col xs='7' className='portfolio-section'>
-            <h2 className='portfolio-header'><span>Portfolio</span> ({portfolioBalance})</h2>
             <PortfolioDisplay transactions={transactions} />
           </Col>
           <Col xs='5' className='buy-form-section'>
@@ -200,7 +203,7 @@ function Portfolio(props) {
                 <span className='modal-company'>{' '}{modalCompany}{' '}[{modalTicker}]</span>
                 <br/>
                 <span className='modal-price-label'>Price:</span>
-                <span className='modal-price'>{' '}{modalPrice}</span>
+                <span className='modal-price'>{' '}${Number(modalPrice).toFixed(2)}</span>
               </ModalBody>
               <ModalFooter>
                 <Button color="success" onClick={continueTrade}>Confirm</Button>
