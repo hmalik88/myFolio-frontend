@@ -23,7 +23,6 @@ function Portfolio(props) {
   useEffect(() => {
     const root = document.querySelector('#root');
     root.className = 'portfolio-root';
-    console.log(props.user)
     setTransactions([...props.user.transactions]);
     setBalance(Number(props.user.user.balance).toFixed(2));
   }, [props.user]);

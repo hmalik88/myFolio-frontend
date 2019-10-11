@@ -11,7 +11,6 @@ function PortfolioDisplay(props) {
     const organizeTransactions = async () => {
       const obj = {};
       props.transactions.forEach(transaction => {
-        console.log(transaction);
         if (!obj[transaction.ticker]) {
           obj[transaction.ticker] = {qty: transaction.quantity, price: null, color: null}
         } else {
@@ -37,7 +36,6 @@ function PortfolioDisplay(props) {
         }
       });
       setTransactionObj(obj);
-      console.log(obj)
     }
     organizeTransactions();
   }, [props.transactions]);

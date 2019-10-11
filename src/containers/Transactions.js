@@ -8,7 +8,6 @@ function Transactions(props) {
   useEffect(() => {
     const root = document.querySelector('#root');
     root.className = 'transactions-root';
-    console.log(props.user)
   }, [props.user]);
 
   const transactionList = () => {
