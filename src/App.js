@@ -11,7 +11,9 @@ function App(props) {
 
   const [user, setUser] = useState({user: {}, transactions: []});
   const [loginFormText, setLoginFormText] = useState('');
-  const [registerFormText, setRegisterFormText] = useState('');
+  const [registerEmailText, setRegisterEmailText] = useState('');
+  const [registerNameText, setRegisterNameText] = useState('');
+  const [registerPasswordText, setRegisterPasswordText] = useState('');
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -74,7 +76,17 @@ function App(props) {
   const handleRegistration = (e, name, email, password) => {
     e.preventDefault()
     const exp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    if (!email.match(exp)) return setRegisterFormText('Please enter a valid e-mail.');
+    const nameText = document.querySelector('.register-name-text');
+    const emailText = document.querySelector('.register-email-text');
+    const passwordText = document.querySelector('.register-password-text');
+    [nameText, emailText, passwordText].forEach(el => {
+      el.classList.remove('text-muted');
+      el.classList.add('error-form-text');
+    })
+    if (!email.match(exp)) setRegisterEmailText('Please enter a valid e-mail.');
+    if (name === '') setRegisterNameText('Please enter a valid name.');
+    if (password === '') setRegisterPasswordText('Please enter a valid password.');
+    if (!password || !name || !password) return;
     const user = {
       user: {
         name: name,
@@ -106,7 +118,7 @@ function App(props) {
       const formText = document.querySelector('.register-row .form-text')
       formText.classList.remove('text-muted');
       formText.classList.add('error-form-text');
-      setRegisterFormText(error.message)
+      setRegisterEmailText(error.message)
     })
   }
 
@@ -116,7 +128,7 @@ function App(props) {
       <Switch>
         <Route exact path='/' component={Landing} />
         <Route exact path='/login' render={() => <Login {...props} handleLogin={handleLogin} loginFormText={loginFormText} setLoginFormText={setLoginFormText} />} />
-        <Route exact path='/register' render={() => <Register {...props} handleRegistration={handleRegistration} registerFormText={registerFormText} setRegisterFormText={setRegisterFormText} />} />
+        <Route exact path='/register' render={() => <Register {...props} handleRegistration={handleRegistration} registerEmailText={registerEmailText} setRegisterEmailText={setRegisterEmailText} registerPasswordText={registerPasswordText} registerNameText={registerNameText} setRegisterPasswordText={setRegisterPasswordText} setRegisterNameText={setRegisterNameText} />} />
         <Route exact path='/portfolio' render={() => <Portfolio user={user} />} />
         <Route exact path='/transactions' render={() => <Transactions user={user} />} />
       </Switch>

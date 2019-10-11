@@ -14,10 +14,17 @@ function Register(props) {
     root.className = 'register-root';
   }, [])
 
-  const handleNameChange = e => setName(e.target.value);
+  const handleNameChange = e => {
+    props.setRegisterNameText('');
+    props.setRegisterEmailText('');
+    props.setRegisterPasswordText('');
+    setName(e.target.value)
+  };
 
   const handleEmailChange = e => {
-    props.setRegisterFormText('');
+    props.setRegisterNameText('');
+    props.setRegisterEmailText('');
+    props.setRegisterPasswordText('');
     setEmail(e.target.value);
   };
 
@@ -34,7 +41,9 @@ function Register(props) {
         handleEmailChange={handleEmailChange}
         handlePasswordChange={handlePasswordChange}
         handleRegistration={props.handleRegistration}
-        registerFormText={props.registerFormText}
+        registerEmailText={props.registerEmailText}
+        registerNameText={props.registerNameText}
+        registerPasswordText={props.registerPasswordText}
       />
     </>
     )

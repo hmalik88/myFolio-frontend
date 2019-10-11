@@ -11,16 +11,18 @@ function RegisterForm(props) {
             <h2 className='register-title'>Sign up for an account!</h2>
             <FormGroup>
               <Label className='register-label' for='register-name'>Name</Label>
-              <Input value={props.name} onChange={props.handleNameChange} type='text' id='register-name' />
+              <Input autoComplete='off' value={props.name} name='r-name' onChange={props.handleNameChange} type='text' id='register-name' />
+              <FormText className='register-name-text'>{props.registerNameText}</FormText>
             </FormGroup>
             <FormGroup>
               <Label className='register-label' for='register-email'>E-mail</Label>
-              <Input value={props.email} onChange={props.handleEmailChange} type='email' id='register-email' />
-              <FormText>{props.registerFormText}</FormText>
+              <Input autoComplete='off' value={props.email} name='r-email' onChange={props.handleEmailChange} type='email' id='register-email' />
+              <FormText className='register-email-text'>{props.registerEmailText}</FormText>
             </FormGroup>
             <FormGroup>
               <Label className='register-label' for='register-password'>Password</Label>
-              <Input value={props.password} onChange={props.handlePasswordChange} bsSize='md' id='register-password' type='password' />
+              <Input autoComplete='off' value={props.password} name='r-password' onChange={props.handlePasswordChange} bsSize='md' id='register-password' type='password' />
+              <FormText className='register-password-text'>{props.registerPasswordText}</FormText>
             </FormGroup>
             <Button className='register-form-btn text-center'>Register</Button>
           </Form>
