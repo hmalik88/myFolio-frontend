@@ -16,8 +16,8 @@ In order to install the front-end of this application, you need to do the follow
 
 The front-end is now ready for interaction.
 
-*Note: If live link is down, you can simulate the application by changing the fetch requests from
+*Note: If live link is down, you can simulate the application by changing the fetch requests from*
 
-https://myfolio-api.herokuapp.com/ to http://localhost:3000/api/v1/*
+*https://myfolio-api.herokuapp.com/ to http://localhost:3000/api/v1/*
 
 *Please see the following link for the back-end: https://github.com/hmalik88/myFolio-backend* 
